@@ -1,0 +1,12 @@
+---
+- name: Create and configure nginx web server
+  hosts: droplet
+  tasks:
+    - name: install nginx server
+      apt:
+        name: nginx
+        state: latest
+    - name: start nginx server
+      service:
+        name: nginx
+        state: started
