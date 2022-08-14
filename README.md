@@ -10,7 +10,7 @@ Example:
 
 > ansible all -i hosts -m ping
 
-> ansible app_server_1 -i hosts -m ping
+> ansible droplet -i hosts -m ping
 
 ## Grouping host
 
