@@ -6,6 +6,12 @@
   - "all" = default group, which contains every host
 - [module] = discrete units of code
 
+Example:
+
+> ansible all -i hosts -m ping
+
+> ansible app_server_1 -i hosts -m ping
+
 ## Grouping host
 
 Track:
