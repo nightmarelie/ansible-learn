@@ -4,8 +4,8 @@
   tasks:
     - name: install nginx server
       apt:
-        name: nginx
-        state: latest
+        name: nginx=1.18*
+        state: present
     - name: start nginx server
       service:
         name: nginx

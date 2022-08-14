@@ -19,3 +19,7 @@ Track:
 - WHERE - a datacenter/region
 - WHAT - e.g. db, server etc
 - WHEN - wich stage. e.g. dev, test, prod env
+
+## Ansible playbook
+
+> ansible-playbook -i hosts app-playbook.yaml
