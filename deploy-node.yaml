@@ -18,7 +18,7 @@
   tasks:
     - name: Create linux user
       user:
-        name: nigth
+        name: "{{linux_name}}"
         comment: Night
         group: admin
       register: user_creation_result
@@ -27,10 +27,9 @@
 - name: Deploy nodejs app
   hosts: droplet
   become: True
-  become_user: night
-  vars:
-    - location: /Users/okryvtsov/Programming/devops/bootcamp-projects/ansible-learn
-    - destination: /home/night
+  become_user: "{{linux_name}}"
+  vars_files:
+    - project-vars.yaml
   tasks:
     - name: Unpack th nodejs tar file
       unarchive:
