@@ -13,24 +13,35 @@
           - nodejs
           - npm
 
+- name: Create new linux user for node app
+  hosts: droplet
+  tasks:
+    - name: Create linux user
+      user:
+        name: nigth
+        comment: Night
+        group: admin
+
 - name: Deploy nodejs app
   hosts: droplet
+  become: True
+  become_user: night
   tasks:
     - name: Copy nodejs folder to a server
       copy:
         src: /Users/okryvtsov/Programming/devops/bootcamp-projects/ansible-learn/react-nodejs-example-1.0.0.tgz
-        dest: /root/app-1.0.0.tgz
+        dest: /home/night/app-1.0.0.tgz
     - name: Unpack th nodejs tar file
       unarchive:
-        src: /root/app-1.0.0.tgz
-        dest: /root/
+        src: /home/night/app-1.0.0.tgz
+        dest: /home/night/
         remote_src: yes
     - name: Install dependencies
       npm:
-        path: /root/package
+        path: /home/night/package
     - name: Start the application
       command:
-        chdir: /root/package/app
+        chdir: /home/night/package/app
         cmd: node server
       async: 1000
       poll: 0
