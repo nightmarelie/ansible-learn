@@ -25,3 +25,16 @@
         src: /root/app-1.0.0.tgz
         dest: /root/
         remote_src: yes
+    - name: Install dependencies
+      npm:
+        path: /root/package
+    - name: Start the application
+      command:
+        chdir: /root/package/app
+        cmd: node server
+      async: 1000
+      poll: 0
+    - name: Ensure app is running
+      shell: ps aux | grep node
+      register: app_status
+    - debug: msg={{app_status.stdout_lines}}
