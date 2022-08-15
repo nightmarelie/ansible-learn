@@ -23,3 +23,8 @@ Track:
 ## Ansible playbook
 
 > ansible-playbook -i hosts app-playbook.yaml
+> ansible-playbook -i inventory_aws_ec2.yaml deploy-docker-ec2-user.yaml
+
+## Ansible inventory
+
+> ansible-inventory -i inventory_aws_ec2.yaml --graph
