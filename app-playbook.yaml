@@ -2,11 +2,11 @@
 - name: Create and configure nginx web server
   hosts: droplet
   tasks:
-    - name: install nginx server
+    - name: Install nginx server
       apt:
         name: nginx=1.18*
         state: present
-    - name: start nginx server
+    - name: Start nginx server
       service:
         name: nginx
         state: started
