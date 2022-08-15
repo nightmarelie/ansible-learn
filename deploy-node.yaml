@@ -21,27 +21,27 @@
         name: nigth
         comment: Night
         group: admin
+      register: user_creation_result
+    - debug: msg={{user_creation_result}}
 
 - name: Deploy nodejs app
   hosts: droplet
   become: True
   become_user: night
+  vars:
+    - location: /Users/okryvtsov/Programming/devops/bootcamp-projects/ansible-learn
+    - destination: /home/night
   tasks:
-    - name: Copy nodejs folder to a server
-      copy:
-        src: /Users/okryvtsov/Programming/devops/bootcamp-projects/ansible-learn/react-nodejs-example-1.0.0.tgz
-        dest: /home/night/app-1.0.0.tgz
     - name: Unpack th nodejs tar file
       unarchive:
-        src: /home/night/app-1.0.0.tgz
-        dest: /home/night/
-        remote_src: yes
+        src: "{{location}}/react-nodejs-example-1.0.0.tgz"
+        dest: "{{destination}}"
     - name: Install dependencies
       npm:
-        path: /home/night/package
+        path: "{{destination}}/package"
     - name: Start the application
       command:
-        chdir: /home/night/package/app
+        chdir: "{{destination}}/package/app"
         cmd: node server
       async: 1000
       poll: 0
